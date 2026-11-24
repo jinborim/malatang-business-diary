@@ -133,17 +133,17 @@ func _apply_manual_seated_pose() -> void:
 	var upper_leg_rotation:=Quaternion(Vector3.RIGHT,deg_to_rad(-78.0))
 	var lower_leg_rotation:=Quaternion(Vector3.RIGHT,deg_to_rad(105.0))
 	for bone_name in [&"mixamorig:LeftUpLeg",&"mixamorig:RightUpLeg"]:
-		var bone_index:=skeleton.find_bone(bone_name)
+		var bone_index:int=skeleton.find_bone(bone_name)
 		if bone_index>=0: skeleton.set_bone_pose_rotation(bone_index,upper_leg_rotation)
 	for bone_name in [&"mixamorig:LeftLeg",&"mixamorig:RightLeg"]:
-		var bone_index:=skeleton.find_bone(bone_name)
+		var bone_index:int=skeleton.find_bone(bone_name)
 		if bone_index>=0: skeleton.set_bone_pose_rotation(bone_index,lower_leg_rotation)
 	var hips_index:=skeleton.find_bone(&"mixamorig:Hips")
 	if hips_index>=0: skeleton.set_bone_pose_position(hips_index,Vector3(0,-0.30,0))
 	var spine_index:=skeleton.find_bone(&"mixamorig:Spine")
 	if spine_index>=0: skeleton.set_bone_pose_rotation(spine_index,Quaternion(Vector3.RIGHT,deg_to_rad(8.0)))
 	for bone_name in [&"mixamorig:LeftArm",&"mixamorig:RightArm"]:
-		var bone_index:=skeleton.find_bone(bone_name)
+		var bone_index:int=skeleton.find_bone(bone_name)
 		if bone_index>=0: skeleton.set_bone_pose_rotation(bone_index,Quaternion(Vector3.RIGHT,deg_to_rad(-18.0)))
 
 func _set_standing_pose() -> void:

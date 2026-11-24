@@ -48,11 +48,11 @@ func set_player_arms_visible(should_show: bool) -> void:
 	host.player_arms_visible=should_show
 	if should_show: pose_player_arms_for_tools()
 	for bone_name in [&"mixamorig_LeftArm",&"mixamorig_RightArm"]:
-		var bone_index:=host.player_skeleton.find_bone(bone_name)
+		var bone_index:int=host.player_skeleton.find_bone(bone_name)
 		if bone_index<0: continue
 		host.player_skeleton.set_bone_pose_scale(bone_index,Vector3.ONE if should_show else Vector3.ONE*0.001)
 		if not should_show:
-			var hidden_pose:=host.player_skeleton.get_bone_global_pose(bone_index)
+			var hidden_pose:Transform3D=host.player_skeleton.get_bone_global_pose(bone_index)
 			hidden_pose.basis=hidden_pose.basis.scaled(Vector3.ONE*0.001)
 			host.player_skeleton.set_bone_global_pose_override(bone_index,hidden_pose,1.0,true)
 
@@ -65,7 +65,7 @@ func update_player_animation() -> void:
 		host.player_skeleton.clear_bones_global_pose_override()
 		host.player_arms_visible=true
 		for bone_name in [&"mixamorig_LeftArm",&"mixamorig_RightArm"]:
-			var bone_index:=host.player_skeleton.find_bone(bone_name)
+			var bone_index:int=host.player_skeleton.find_bone(bone_name)
 			if bone_index>=0: host.player_skeleton.set_bone_pose_scale(bone_index,Vector3.ONE)
 		if host.player_animation_player and not host.player_walking_animation.is_empty():
 			host.player_animation_player.play(host.player_walking_animation,0.15,1.0)
@@ -99,7 +99,7 @@ func pose_player_arms_for_tools() -> void:
 		var bone_name: StringName=pose[0] as StringName
 		var start: Vector3=pose[1] as Vector3
 		var target: Vector3=pose[2] as Vector3
-		var bone_index:=host.player_skeleton.find_bone(bone_name)
+		var bone_index:int=host.player_skeleton.find_bone(bone_name)
 		if bone_index<0: continue
 		var transform:=Transform3D(_basis_with_y_axis(target-start),start)
 		host.player_skeleton.set_bone_global_pose_override(bone_index,transform,1.0,true)
