@@ -30,3 +30,9 @@ func apply_tongs_material(root:Node) -> void:
 		mesh_instance.material_overlay=material
 		if not mesh_instance.mesh: continue
 		for surface in range(mesh_instance.mesh.get_surface_count()): mesh_instance.set_surface_override_material(surface,material)
+
+func apply_ingredient_bowl_material(root: Node) -> void:
+	var material:=make_shared_steel_material()
+	for child in root.find_children("*","MeshInstance3D",true,false):
+		var mesh_instance:=child as MeshInstance3D
+		if mesh_instance: mesh_instance.material_overlay=material

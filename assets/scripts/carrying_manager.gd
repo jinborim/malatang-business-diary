@@ -70,8 +70,51 @@ func instantiate_empty_bowl() -> Node3D:
 	var resource: Resource=load("res://assets/models/malatang_empty_bowl.fbx")
 	if not resource is PackedScene: return null
 	var model: Node3D=(resource as PackedScene).instantiate() as Node3D
-	if is_instance_valid(model): host._apply_empty_bowl_material(model)
+	if is_instance_valid(model): apply_empty_bowl_material(model)
 	return model
+
+func apply_empty_bowl_material(root: Node) -> void:
+	var material:=StandardMaterial3D.new()
+	material.albedo_color=Color.WHITE
+	material.albedo_texture=load("res://assets/models/malatang_empty_bowl.png") as Texture2D
+	material.normal_texture=load("res://assets/models/malatang_empty_bowl_normal.png") as Texture2D
+	material.normal_enabled=material.normal_texture != null
+	material.metallic_texture=load("res://assets/models/malatang_empty_bowl_metallic.png") as Texture2D
+	material.roughness_texture=load("res://assets/models/malatang_empty_bowl_roughness.png") as Texture2D
+	material.metallic=0.15
+	material.roughness=0.32
+	for child in root.find_children("*","MeshInstance3D",true,false):
+		var mesh_instance:=child as MeshInstance3D
+		if mesh_instance: mesh_instance.material_override=material
+
+func add_world_tool_model(path: String, world_position: Vector3, rotation: Vector3, model_scale: float, is_tongs: bool) -> Node3D:
+	var resource:Resource=load(path)
+	if not resource is PackedScene: return null
+	var model:Node3D=(resource as PackedScene).instantiate() as Node3D
+	model.position=world_position+Vector3(0,-0.18,0) if path.contains("dining_table") else world_position
+	model.rotation_degrees=rotation
+	model.scale=Vector3.ONE*model_scale
+	host.add_child(model)
+	if is_tongs: host._apply_tongs_material(model)
+	else: host._apply_ingredient_bowl_material(model)
+	return model
+
+func set_held_render_front(root: Node) -> void:
+	if not is_instance_valid(root) or root.has_meta("held_render_front"): return
+	root.set_meta("held_render_front",true)
+	var meshes:Array[MeshInstance3D]=[]
+	if root is MeshInstance3D: meshes.append(root as MeshInstance3D)
+	for child in root.find_children("*","MeshInstance3D",true,false): meshes.append(child as MeshInstance3D)
+	for mesh_instance in meshes:
+		if not is_instance_valid(mesh_instance) or not is_instance_valid(mesh_instance.mesh): continue
+		mesh_instance.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		for surface_index in mesh_instance.mesh.get_surface_count():
+			var source_material:=mesh_instance.get_active_material(surface_index)
+			if source_material is BaseMaterial3D:
+				var front_material:BaseMaterial3D=(source_material as BaseMaterial3D).duplicate()
+				front_material.no_depth_test=true
+				front_material.render_priority=50
+				mesh_instance.set_surface_override_material(surface_index,front_material)
 
 func take_bowl_from_stack(take_all: bool=false) -> int:
 	if host.bowl_stack_models.is_empty():

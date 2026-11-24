@@ -104,6 +104,22 @@ func set_pot_filled_visual(filled:bool) -> void:
 	if is_instance_valid(host.broth_pot_model): host.broth_pot_model.visible=not filled
 	if is_instance_valid(host.broth_pot_interaction): host.broth_pot_interaction.set_meta("highlight_target",host.broth_pot_filled_model if filled and is_instance_valid(host.broth_pot_filled_model) else host.broth_pot_model)
 
+func set_pot_carried_collision(carried: bool) -> void:
+	for pot_model in [host.broth_pot_model,host.broth_pot_filled_model]:
+		if not is_instance_valid(pot_model): continue
+		pot_model.set_meta("interaction_disabled",carried)
+		var model_body:=pot_model.get_node_or_null("BrothPotCollision") as StaticBody3D
+		if not is_instance_valid(model_body): model_body=pot_model.get_node_or_null("BrothPotFilledCollision") as StaticBody3D
+		if is_instance_valid(model_body):
+			model_body.collision_layer=0 if carried else 1
+			model_body.collision_mask=0 if carried else 1
+	var interaction_body:StaticBody3D=null
+	if is_instance_valid(host.broth_pot_interaction): interaction_body=host.broth_pot_interaction.get_node_or_null("StaticBody3D") as StaticBody3D
+	if is_instance_valid(interaction_body):
+		interaction_body.collision_layer=0 if carried else 1
+		interaction_body.collision_mask=0 if carried else 1
+	if is_instance_valid(host.broth_pot_interaction): host.broth_pot_interaction.set_meta("interaction_disabled",carried)
+
 func add_water(use_sink_stream: bool=false) -> void:
 	if not is_instance_valid(host): return
 	if not can_prepare(): return

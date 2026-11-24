@@ -99,3 +99,31 @@ func quest_text_v3() -> String:
 		9: return "10/11  마라탕을 조리하세요.\n재료와 맵기가 준비되면 조리 냄비에서 E키를 누르세요."
 		10: return "11/11  완성된 주문을 배달하세요.\n완성된 음식을 배달대에 전달하세요."
 	return "튜토리얼 완료"
+
+func update_tutorial_page() -> void:
+	var pages:Array[Array]=[
+		["Move with W A S D", "Look around with the mouse and press E to interact."],
+		["Accept an order", "Open the order monitor and accept a delivery order."],
+		["Prepare ingredients", "Pick up ingredients one at a time and place them in the bowl."],
+		["Finish the meal", "Cook the broth, complete the order, and deliver it."]
+	]
+	var page:=pages[clampi(host.tutorial_step,0,pages.size()-1)]
+	host.tutorial_title.text=str(page[0])
+	host.tutorial_body.text=str(page[1])
+	host.tutorial_button.text="Next" if host.tutorial_step<pages.size()-1 else "Finish (Enter)"
+
+func advance_tutorial() -> void:
+	if not host.tutorial_active: return
+	if host.tutorial_step<3:
+		host.tutorial_step+=1
+		update_tutorial_page()
+		return
+	host.tutorial_active=false
+	host.tutorial_seen=true
+	if is_instance_valid(host.tutorial_overlay): host.tutorial_overlay.visible=false
+	var player:=host.get_node_or_null("Player") as CharacterBody3D
+	if is_instance_valid(player): player.input_locked=false
+	if is_instance_valid(host.held_tools): host.held_tools.visible=true
+	host._set_gameplay_hud_visible(true)
+	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
+	host._save_game(false)

@@ -29,6 +29,8 @@ const MANAGER_SPECS := [
 	{"property": "game_clock_manager", "script": "game_clock_manager.gd", "node_name": "GameClockManager"},
 	{"property": "game_loop_manager", "script": "game_loop_manager.gd", "node_name": "GameLoopManager"},
 	{"property": "lifecycle_manager", "script": "lifecycle_manager.gd", "node_name": "LifecycleManager"},
+	{"property": "world_asset_manager", "script": "world_asset_manager.gd", "node_name": "WorldAssetManager"},
+	{"property": "game_flow_manager", "script": "game_flow_manager.gd", "node_name": "GameFlowManager"},
 ]
 
 const SCRIPT_ROOT := "res://assets/scripts/"

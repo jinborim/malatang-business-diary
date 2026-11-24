@@ -588,6 +588,120 @@ func build_order_panel(layer: CanvasLayer) -> void:
 	host.next_day_confirmation.cancel_button_text="\uCDE8\uC18C"
 	host.next_day_confirmation.confirmed.connect(host._start_next_day)
 	layer.add_child(host.next_day_confirmation)
+
+func apply_ui_theme() -> void:
+	var button_normal:=StyleBoxFlat.new()
+	button_normal.bg_color=Color("#26313b")
+	button_normal.border_color=Color("#536575")
+	button_normal.set_border_width_all(1)
+	button_normal.set_corner_radius_all(5)
+	button_normal.content_margin_left=14
+	button_normal.content_margin_right=14
+	var button_hover:=button_normal.duplicate()
+	button_hover.bg_color=Color("#37566a")
+	button_hover.border_color=Color("#69c6d8")
+	var button_pressed:=button_normal.duplicate()
+	button_pressed.bg_color=Color("#1a8292")
+	button_pressed.border_color=Color("#92efff")
+	for button in [host.receipt_toggle_button]:
+		if is_instance_valid(button):
+			button.add_theme_stylebox_override("normal",button_normal)
+			button.add_theme_stylebox_override("hover",button_hover)
+			button.add_theme_stylebox_override("pressed",button_pressed)
+			button.add_theme_color_override("font_color",Color("#e8f5f7"))
+			button.add_theme_color_override("font_hover_color",Color.WHITE)
+	for button in host.order_panel.find_children("", "Button", true, false):
+		button.add_theme_stylebox_override("normal",button_normal)
+		button.add_theme_stylebox_override("hover",button_hover)
+		button.add_theme_stylebox_override("pressed",button_pressed)
+		button.add_theme_color_override("font_color",Color("#e8f5f7"))
+		button.add_theme_color_override("font_hover_color",Color.WHITE)
+		button.add_theme_font_size_override("font_size",16)
+	if is_instance_valid(host.prompt_label):
+		host.prompt_label.add_theme_color_override("font_color",Color("#ffe082"))
+		host.prompt_label.add_theme_color_override("font_shadow_color",Color(0,0,0,0.85))
+		host.prompt_label.add_theme_constant_override("shadow_offset_x",2)
+		host.prompt_label.add_theme_constant_override("shadow_offset_y",2)
+
+func refresh_upgrade_panel() -> void:
+	var description:=Label.new()
+	description.text="가게 업그레이드"
+	description.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	host.order_list.add_child(description)
+	_add_upgrade_button("재료 보관량", "stock", 50000, "재료 보관량 +5")
+	_add_upgrade_button("조리 속도", "cooking", 65000, "조리 시간 단축")
+	_add_upgrade_button("이동 속도", "movement", 60000, "이동 속도 증가")
+	if host.store_stage==1 and not host.pending_upgrades.has("stage2"):
+		_add_upgrade_button("가게 2단계 확장", "stage2", 350000, "매장 손님 공간 잠금 해제")
+	elif host.store_stage==2 and not host.pending_upgrades.has("stage3"):
+		_add_upgrade_button("가게 3단계 확장", "stage3", 700000, "테이블 공간 확장")
+	var day_button:=Button.new()
+	day_button.text="영업 종료 및 정산"
+	day_button.custom_minimum_size=Vector2(0,58)
+	day_button.pressed.connect(host._end_day)
+	host.order_list.add_child(day_button)
+
+func _add_upgrade_button(title: String, key: String, price: int, detail: String) -> void:
+	var button:=Button.new()
+	button.text="%s · %d원\\n%s | 현재 레벨 %d" % [title,price,detail,int(host.upgrade_levels.get(key,0))]
+	button.custom_minimum_size=Vector2(0,65)
+	button.pressed.connect(host._purchase_upgrade.bind(key,price,title))
+	host.order_list.add_child(button)
+
+func refresh_settlement_panel() -> void:
+	var average_rating:float=host.daily_rating_total/float(host.daily_completed_orders) if host.daily_completed_orders>0 else host.rating
+	var net_profit:int=host.daily_sales-host.daily_material_cost
+	var title:=Label.new()
+	title.text="\\uC601\\uC5C5 \\uC815\\uC0B0"
+	title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size",28)
+	title.add_theme_color_override("font_color",Color("#294052"))
+	host.order_list.add_child(title)
+	var subtitle:=Label.new()
+	subtitle.text="\\uC624\\uB298\\uC758 \\uC601\\uC5C5 \\uACB0\\uACFC\\uC640 \\uB2E4\\uC74C \\uB0A0 \\uC900\\uBE44 \\uC0C1\\uD0DC\\uC785\\uB2C8\\uB2E4."
+	subtitle.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	host.order_list.add_child(subtitle)
+	var stats:=GridContainer.new()
+	stats.columns=3
+	stats.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	stats.add_theme_constant_override("h_separation",12)
+	stats.add_theme_constant_override("v_separation",12)
+	host.order_list.add_child(stats)
+	var values:Array=[["\\uC624\\uB298 \\uB9E4\\uCD9C",str(host.daily_sales)+"\\uC6D0"],["\\uC7AC\\uB8CC\\uBE44",str(host.daily_material_cost)+"\\uC6D0"],["\\uC21C\\uC774\\uC775",str(net_profit)+"\\uC6D0"],["\\uBCF4\\uC720\\uAE08",str(host.money)+"\\uC6D0"],["\\uC644\\uB8CC \\uC8FC\\uBB38",str(host.daily_completed_orders)+"\\uAC74"],["\\uD3C9\\uC810",("%.1f" % average_rating)+"\\uC810"]]
+	for item in values:
+		var card:=PanelContainer.new()
+		card.custom_minimum_size=Vector2(0,112)
+		var card_style:=StyleBoxFlat.new()
+		card_style.bg_color=Color("#ffffff")
+		card_style.border_color=Color("#d2b98e")
+		card_style.set_border_width_all(1)
+		card_style.set_corner_radius_all(8)
+		card.add_theme_stylebox_override("panel",card_style)
+		var content:=VBoxContainer.new()
+		content.alignment=BoxContainer.ALIGNMENT_CENTER
+		card.add_child(content)
+		var key_label:=Label.new()
+		key_label.text=item[0]
+		key_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+		content.add_child(key_label)
+		var value_label:=Label.new()
+		value_label.text=item[1]
+		value_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+		value_label.add_theme_font_size_override("font_size",24)
+		value_label.add_theme_color_override("font_color",Color("#294052"))
+		content.add_child(value_label)
+		stats.add_child(card)
+	var pending:=Label.new()
+	pending.text="\\uB2E4\\uC74C \\uB0A0 \\uC5C5\\uADF8\\uB808\\uC774\\uB4DC: "+("\\uC5C6\\uC74C" if host.pending_upgrades.is_empty() else ", ".join(host.pending_upgrades))
+	pending.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	pending.add_theme_font_size_override("font_size",17)
+	host.order_list.add_child(pending)
+	var next_day:=Button.new()
+	next_day.text="Confirm - %d day start" % (host.day+1)
+	next_day.custom_minimum_size=Vector2(0,58)
+	next_day.pressed.connect(host._start_next_day)
+	host.order_list.add_child(next_day)
+
 func refresh_order_panel() -> void:
 	if not host.order_list: return
 	host.call_deferred("_style_monitor_controls")
@@ -600,10 +714,10 @@ func refresh_order_panel() -> void:
 		host._refresh_shop_panel()
 		return
 	if host.monitor_mode == "upgrades":
-		host._refresh_upgrade_panel()
+		refresh_upgrade_panel()
 		return
 	if host.monitor_mode == "settlement":
-		host._refresh_settlement_panel()
+		refresh_settlement_panel()
 		return
 	if host.monitor_mode == "management":
 		refresh_management_panel()
@@ -838,6 +952,40 @@ func open_monitor() -> void:
 	host.monitor_camera_original_rotation=host.camera.rotation
 	host.monitor_camera_original_fov=host.camera.fov
 	host._set_gameplay_hud_visible(false)
+
+func close_monitor() -> void:
+	if not host.monitor_camera_focused:
+		host.monitor_backdrop.visible=false
+		host.order_panel.visible=false
+		Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
+		return
+	host.order_panel.visible=false
+	host.monitor_backdrop.visible=false
+	host.monitor_backdrop.modulate.a=1.0
+	host.order_panel.modulate.a=1.0
+	host.monitor_camera_focused=false
+	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
+	var player:=host.get_node_or_null("Player") as CharacterBody3D
+	if is_instance_valid(player): player.global_transform=host.monitor_player_original_transform
+	host.camera.global_transform=host.monitor_camera_original_transform
+	host.camera.rotation=host.monitor_camera_original_rotation
+	host.camera.fov=host.monitor_camera_original_fov
+	finish_monitor_return()
+
+func ingredient_icon_path(ingredient_name: String) -> String:
+	var paths:Dictionary={
+		"\\uCCAD\\uACBD\\uCC44":"res://assets/ui/ingredients/cheonggyeongchae.svg",
+		"\\uC54C\\uBC30\\uAE30\\uBC30\\uCD94":"res://assets/ui/ingredients/albaechu.svg",
+		"\\uAC74\\uB450\\uBD80":"res://assets/ui/ingredients/gan_doufu.svg",
+		"\\uBAA9\\uC774\\uBC84\\uC12F":"res://assets/ui/ingredients/mokiboseot.svg",
+		"\\uD301\\uC774\\uBC84\\uC12F":"res://assets/ui/ingredients/paengiboseot.svg",
+		"\\uC219\\uC8FC":"res://assets/ui/ingredients/sukju.svg",
+		"\\uC911\\uAD6D\\uB2F9\\uBA74":"res://assets/ui/ingredients/jung_guk.svg",
+		"\\uBD84\\uBAA8\\uC790":"res://assets/ui/ingredients/bunmoja.svg",
+		"\\uD53C\\uC26C\\uBCFC":"res://assets/ui/ingredients/fishball.svg",
+		"\\uC18C\\uC2DC\\uC9C0":"res://assets/ui/ingredients/sausage.svg"
+	}
+	return str(paths.get(ingredient_name,"res://assets/ui/ingredients/cheonggyeongchae.svg"))
 	player.input_locked=true
 	if is_instance_valid(host.held_tools): host.held_tools.visible=false
 	host.prompt_label.text=""
