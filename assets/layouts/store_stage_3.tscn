@@ -1,0 +1,163 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/gas_stove.fbx" id="1_stove"]
+[ext_resource type="PackedScene" path="res://assets/models/malatang_pot.fbx" id="2_pot"]
+[ext_resource type="PackedScene" path="res://assets/models/stainless_table.fbx" id="3_table"]
+[ext_resource type="Script" path="res://assets/scripts/layout_builder.gd" id="4_builder"]
+[ext_resource type="PackedScene" path="res://assets/models/order_monitor.fbx" id="5_monitor"]
+[ext_resource type="PackedScene" path="res://assets/models/kitchen_tongs.fbx" id="6_tongs"]
+[ext_resource type="PackedScene" path="res://assets/models/ingredient_bowl.fbx" id="7_bowl"]
+[ext_resource type="PackedScene" path="res://assets/models/spice_level_3.fbx" id="8_spice"]
+[ext_resource type="PackedScene" path="res://assets/models/dining_table.fbx" id="9_dining_table"]
+[ext_resource type="PackedScene" path="res://assets/models/dining_chair.fbx" id="10_dining_chair"]
+[ext_resource type="PackedScene" path="res://assets/models/sink/sink.fbx" id="11_sink"]
+
+[node name="EditableModels" type="Node3D"]
+script = ExtResource("4_builder")
+stage = 3
+
+[node name="CommercialGasStoveModel" parent="." instance=ExtResource("1_stove")]
+editable_instance = true
+position = Vector3(0, 1.1, -7.5)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(1.55, 1.55, 1.55)
+
+[node name="MalatangCookingPotModel" parent="." instance=ExtResource("2_pot")]
+editable_instance = true
+position = Vector3(1.2, 1.55, -7.5)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(0.62, 0.62, 0.62)
+
+[node name="StainlessPrepTableModel" parent="." instance=ExtResource("3_table")]
+editable_instance = true
+position = Vector3(4.1199355, 0.7749068, -7.9997315)
+scale = Vector3(2.798201, 1.8644216, 1.6090811)
+
+[node name="KitchenSinkModel_EditorPreview" parent="." instance=ExtResource("11_sink")]
+editable_instance = true
+position = Vector3(7.716266, 1.4421797, -8.069077)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(1.5901905, 1.5576197, 1.7658647)
+
+[node name="OrderMonitorModel" parent="." instance=ExtResource("5_monitor")]
+editable_instance = true
+position = Vector3(6.55, 1.48, -3.95)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(0.48, 0.48, 0.48)
+
+[node name="KitchenTongsPickupModel" parent="." instance=ExtResource("6_tongs")]
+editable_instance = true
+position = Vector3(4.35, 1.1, -6.87)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(0.22, 0.22, 0.22)
+
+[node name="IngredientBowlPickupModel" parent="." instance=ExtResource("7_bowl")]
+editable_instance = true
+position = Vector3(5.25, 1.09, -6.87)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(0.22, 0.22, 0.22)
+
+[node name="SpiceLevel3Editable" parent="." instance=ExtResource("8_spice")]
+editable_instance = true
+position = Vector3(4.1, 1.12, -7.5)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(0.3, 0.3, 0.3)
+
+[node name="DiningArea" type="Node3D" parent="."]
+
+[node name="DiningTableModel_1" type="Node3D" parent="DiningArea" instance=ExtResource("9_dining_table")]
+position = Vector3(1.8, 0.65, 0.9)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(0.72, 0.72, 0.72)
+
+[node name="ChairModel_0_-1" type="Node3D" parent="DiningArea" instance=ExtResource("10_dining_chair")]
+position = Vector3(1.8, 0.45, -0.65)
+scale = Vector3(0.72, 0.72, 0.72)
+
+[node name="ChairModel_0_1" type="Node3D" parent="DiningArea" instance=ExtResource("10_dining_chair")]
+position = Vector3(1.8, 0.45, 2.45)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(0.72, 0.72, 0.72)
+
+[node name="DiningTableModel_2" type="Node3D" parent="DiningArea" instance=ExtResource("9_dining_table")]
+position = Vector3(5, 0.65, 0.9)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(0.72, 0.72, 0.72)
+
+[node name="ChairModel_1_-1" type="Node3D" parent="DiningArea" instance=ExtResource("10_dining_chair")]
+position = Vector3(5, 0.45, -0.65)
+scale = Vector3(0.72, 0.72, 0.72)
+
+[node name="ChairModel_1_1" type="Node3D" parent="DiningArea" instance=ExtResource("10_dining_chair")]
+position = Vector3(5, 0.45, 2.45)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(0.72, 0.72, 0.72)
+
+[node name="DiningTableModel_3" type="Node3D" parent="DiningArea" instance=ExtResource("9_dining_table")]
+position = Vector3(1.8, 0.65, 3.9)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(0.72, 0.72, 0.72)
+
+[node name="ChairModel_2_-1" type="Node3D" parent="DiningArea" instance=ExtResource("10_dining_chair")]
+position = Vector3(1.8, 0.45, 2.35)
+scale = Vector3(0.72, 0.72, 0.72)
+
+[node name="ChairModel_2_1" type="Node3D" parent="DiningArea" instance=ExtResource("10_dining_chair")]
+position = Vector3(1.8, 0.45, 5.45)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(0.72, 0.72, 0.72)
+
+[node name="DiningTableModel_4" type="Node3D" parent="DiningArea" instance=ExtResource("9_dining_table")]
+position = Vector3(5, 0.65, 3.9)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(0.72, 0.72, 0.72)
+
+[node name="ChairModel_3_-1" type="Node3D" parent="DiningArea" instance=ExtResource("10_dining_chair")]
+position = Vector3(5, 0.45, 2.35)
+scale = Vector3(0.72, 0.72, 0.72)
+
+[node name="ChairModel_3_1" type="Node3D" parent="DiningArea" instance=ExtResource("10_dining_chair")]
+position = Vector3(5, 0.45, 5.45)
+rotation_degrees = Vector3(0, 180, 0)
+scale = Vector3(0.72, 0.72, 0.72)
+
+; Single-seat dining row along the left wall.
+[node name="SoloTableModel_1" type="Node3D" parent="DiningArea" instance=ExtResource("9_dining_table")]
+position = Vector3(-6.8, 0.65, 0.8)
+rotation_degrees = Vector3(0, 90, 0)
+scale = Vector3(0.58, 0.58, 0.58)
+
+[node name="SoloChairModel_1" type="Node3D" parent="DiningArea" instance=ExtResource("10_dining_chair")]
+position = Vector3(-5.45, 0.45, 0.8)
+rotation_degrees = Vector3(0, 90, 0)
+scale = Vector3(0.62, 0.62, 0.62)
+
+[node name="SoloTableModel_2" type="Node3D" parent="DiningArea" instance=ExtResource("9_dining_table")]
+position = Vector3(-6.8, 0.65, 2.6)
+rotation_degrees = Vector3(0, 90, 0)
+scale = Vector3(0.58, 0.58, 0.58)
+
+[node name="SoloChairModel_2" type="Node3D" parent="DiningArea" instance=ExtResource("10_dining_chair")]
+position = Vector3(-5.45, 0.45, 2.6)
+rotation_degrees = Vector3(0, 90, 0)
+scale = Vector3(0.62, 0.62, 0.62)
+
+[node name="SoloTableModel_3" type="Node3D" parent="DiningArea" instance=ExtResource("9_dining_table")]
+position = Vector3(-6.8, 0.65, 4.4)
+rotation_degrees = Vector3(0, 90, 0)
+scale = Vector3(0.58, 0.58, 0.58)
+
+[node name="SoloChairModel_3" type="Node3D" parent="DiningArea" instance=ExtResource("10_dining_chair")]
+position = Vector3(-5.45, 0.45, 4.4)
+rotation_degrees = Vector3(0, 90, 0)
+scale = Vector3(0.62, 0.62, 0.62)
+
+[node name="SoloTableModel_4" type="Node3D" parent="DiningArea" instance=ExtResource("9_dining_table")]
+position = Vector3(-6.8, 0.65, 6.2)
+rotation_degrees = Vector3(0, 90, 0)
+scale = Vector3(0.58, 0.58, 0.58)
+
+[node name="SoloChairModel_4" type="Node3D" parent="DiningArea" instance=ExtResource("10_dining_chair")]
+position = Vector3(-5.45, 0.45, 6.2)
+rotation_degrees = Vector3(0, 90, 0)
+scale = Vector3(0.62, 0.62, 0.62)

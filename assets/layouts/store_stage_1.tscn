@@ -1,0 +1,567 @@
+[gd_scene format=3 uid="uid://bl0t8rfb65hla"]
+
+[ext_resource type="PackedScene" uid="uid://cxdil6q8yie5k" path="res://assets/models/gas_stove.fbx" id="1_stove"]
+[ext_resource type="PackedScene" uid="uid://dv4nbcn0h2r7" path="res://assets/models/malatang_pot.fbx" id="2_pot"]
+[ext_resource type="PackedScene" uid="uid://cfprcdppm0g3e" path="res://assets/models/stainless_table.fbx" id="3_table"]
+[ext_resource type="Script" uid="uid://cf7rraho3yhp5" path="res://assets/scripts/layout_builder.gd" id="4_builder"]
+[ext_resource type="PackedScene" uid="uid://bj7litgiu4avc" path="res://assets/models/order_monitor.fbx" id="5_monitor"]
+[ext_resource type="PackedScene" uid="uid://66u7jj3xaumj" path="res://assets/models/kitchen_tongs.fbx" id="6_tongs"]
+[ext_resource type="PackedScene" uid="uid://hgm2pxk41y5x" path="res://assets/models/ingredient_bowl.fbx" id="7_bowl"]
+[ext_resource type="PackedScene" uid="uid://dsxoboqui7fm5" path="res://assets/models/spice_level_3.fbx" id="8_spice"]
+[ext_resource type="Texture2D" uid="uid://ddstqvqracsa8" path="res://assets/textures/stage1_floor_tiles.png" id="9_ljm7x"]
+[ext_resource type="Texture2D" uid="uid://dt4qtas7t23sm" path="res://assets/textures/stage1_wall_tiles.png" id="10_oaneb"]
+[ext_resource type="Texture2D" uid="uid://dhl8f2xypc30w" path="res://assets/textures/stage1_wall_plaster.png" id="11_b31at"]
+[ext_resource type="PackedScene" uid="uid://dlxfrxh6knvw5" path="res://assets/models/serving_bowl.fbx" id="12_46onj"]
+[ext_resource type="PackedScene" uid="uid://y8r58wnig7d2" path="res://assets/models/delivery_container.fbx" id="13_yprid"]
+[ext_resource type="PackedScene" uid="uid://nj6jivi45uuk" path="res://assets/models/broth_pot/broth_pot.fbx" id="14_oaneb"]
+[ext_resource type="PackedScene" uid="uid://bw4fh62lkov8e" path="res://assets/models/tofu_skin.fbx" id="15_yprid"]
+[ext_resource type="PackedScene" uid="uid://ibkkaiw4ej7m" path="res://assets/models/bean_sprouts.fbx" id="16_usbya"]
+[ext_resource type="PackedScene" uid="uid://bjhv6pat0i0oc" path="res://assets/models/sink/sink.fbx" id="17_xapvp"]
+[ext_resource type="PackedScene" uid="uid://cuj5vjv8akm5" path="res://assets/models/broth_stock/stock_pack.fbx" id="18_usbya"]
+[ext_resource type="PackedScene" uid="uid://dhj7orykya8q" path="res://assets/models/broth_pot_import/Meshy_AI_마라탕_육수_냄비_20261122_texture_fbx/Meshy_AI_마라탕_육수_냄비_20261122_texture.fbx" id="19_filled_pot"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xapvp"]
+albedo_texture = ExtResource("9_ljm7x")
+roughness = 0.78
+texture_filter = 5
+
+[sub_resource type="BoxMesh" id="BoxMesh_s7lc1"]
+size = Vector3(18, 0.3, 18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vq8f"]
+albedo_texture = ExtResource("10_oaneb")
+roughness = 0.78
+texture_filter = 5
+
+[sub_resource type="BoxMesh" id="BoxMesh_qbg6r"]
+size = Vector3(18, 5, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yjsl5"]
+albedo_texture = ExtResource("11_b31at")
+roughness = 0.78
+texture_filter = 5
+
+[sub_resource type="BoxMesh" id="BoxMesh_cq2n5"]
+size = Vector3(0.25, 5, 18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7q3b5"]
+albedo_texture = ExtResource("11_b31at")
+roughness = 0.78
+texture_filter = 5
+
+[sub_resource type="BoxMesh" id="BoxMesh_y0s2s"]
+size = Vector3(0.25, 5, 18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_632t7"]
+albedo_texture = ExtResource("11_b31at")
+roughness = 0.78
+texture_filter = 5
+
+[sub_resource type="BoxMesh" id="BoxMesh_ljm7x"]
+size = Vector3(14, 5, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gf372"]
+albedo_texture = ExtResource("11_b31at")
+roughness = 0.78
+texture_filter = 5
+
+[sub_resource type="BoxMesh" id="BoxMesh_b31at"]
+size = Vector3(1.3, 5, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jt3xl"]
+albedo_texture = ExtResource("11_b31at")
+roughness = 0.78
+texture_filter = 5
+
+[sub_resource type="BoxMesh" id="BoxMesh_yprid"]
+size = Vector3(18, 0.25, 18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_usbya"]
+albedo_color = Color(0.23921569, 0.27058825, 0.28235295, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xapvp"]
+size = Vector3(5.8, 4.2, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_05iu5"]
+albedo_color = Color(0.68235296, 0.72156864, 0.72156864, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5vq8f"]
+size = Vector3(5.8, 0.12, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7j1ex"]
+albedo_color = Color(0.68235296, 0.72156864, 0.72156864, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yjsl5"]
+size = Vector3(5.8, 0.12, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k2csc"]
+albedo_color = Color(0.68235296, 0.72156864, 0.72156864, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7q3b5"]
+size = Vector3(5.8, 0.12, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hn8f4"]
+albedo_color = Color(0.68235296, 0.72156864, 0.72156864, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4tp5q"]
+size = Vector3(5.8, 0.12, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nq4e5"]
+albedo_color = Color(0.4745098, 0.41568628, 0.3764706, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_632t7"]
+size = Vector3(2.3237305, 1.1, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hdfax"]
+albedo_color = Color(0.84705883, 0.81960785, 0.77254903, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_t2g33"]
+size = Vector3(7.0119143, 4.838098, 0.32)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6c2rj"]
+albedo_color = Color(0.84705883, 0.81960785, 0.77254903, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h3vx7"]
+size = Vector3(3.1, 4.822656, 0.32)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7dwh"]
+albedo_color = Color(0.84705883, 0.81960785, 0.77254903, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cjnds"]
+size = Vector3(4.7, 1.8799622, 0.32)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uf4jx"]
+albedo_color = Color(0.70980394, 0.2784314, 0.23921569, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d3xau"]
+size = Vector3(3.5, 1.3, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t8j80"]
+albedo_color = Color(0.93333334, 0.9098039, 0.8627451, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_301i1"]
+size = Vector3(0.2, 4, 2.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t2g33"]
+albedo_color = Color(0.60784316, 0.5686275, 0.52156866, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6c2rj"]
+size = Vector3(2.4, 0.9, 0.78)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h3vx7"]
+albedo_color = Color(0.84313726, 0.8156863, 0.7764706, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d7dwh"]
+size = Vector3(0.8, 0.12, 0.48)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cjnds"]
+albedo_color = Color(0.84313726, 0.8156863, 0.7764706, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uf4jx"]
+size = Vector3(0.8, 0.12, 0.48)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4tp5q"]
+albedo_color = Color(0.39215687, 0.58431375, 0.6666667, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hdfax"]
+top_radius = 0.42
+bottom_radius = 0.42
+height = 0.035
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d3xau"]
+albedo_color = Color(0.8901961, 0.7647059, 0.36862746, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_t2g33"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.42
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_301i1"]
+albedo_color = Color(0.78431374, 0.39215687, 0.20784314, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6c2rj"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.42
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ip22y"]
+albedo_color = Color(0.6627451, 0.18039216, 0.15294118, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_h3vx7"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.42
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_odxay"]
+albedo_color = Color(0.4, 0.72156864, 0.45882353, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_d7dwh"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.28
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nlb2m"]
+albedo_color = Color(0.4, 0.72156864, 0.45882353, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cjnds"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.28
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ny2wl"]
+albedo_color = Color(0.4, 0.72156864, 0.45882353, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uf4jx"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.28
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4pyjl"]
+albedo_color = Color(0.4, 0.72156864, 0.45882353, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_d3xau"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.28
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46ugy"]
+albedo_color = Color(0.4, 0.72156864, 0.45882353, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_t8j80"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.28
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5re3"]
+albedo_color = Color(0.4, 0.72156864, 0.45882353, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_301i1"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.28
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uudj7"]
+albedo_color = Color(0.4, 0.72156864, 0.45882353, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_g4g1x"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.28
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rnn3h"]
+albedo_color = Color(0.4, 0.72156864, 0.45882353, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ip22y"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.28
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sdwhp"]
+albedo_color = Color(0.4, 0.72156864, 0.45882353, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wwn7l"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.28
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r2uqa"]
+albedo_color = Color(0.4, 0.72156864, 0.45882353, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_odxay"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.28
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r5q5q"]
+albedo_color = Color(0.4, 0.72156864, 0.45882353, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jx5yl"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.28
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hmej"]
+albedo_color = Color(0.4, 0.72156864, 0.45882353, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nlb2m"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.28
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2njs3"]
+albedo_color = Color(0.3019608, 0.34901962, 0.3764706, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2rx0x"]
+top_radius = 0.48
+bottom_radius = 0.48
+height = 1.1
+
+[node name="EditableModels2" type="Node3D" unique_id=1420986937]
+script = ExtResource("4_builder")
+
+[node name="CommercialGasStoveModel" parent="." unique_id=573747723 instance=ExtResource("1_stove")]
+transform = Transform3D(1.55, 0, 0, 0, 1.55, 0, 0, 0, 1.55, 0, 1.1, -7.958722)
+
+[node name="MalatangCookingPotModel" parent="." unique_id=1302259153 instance=ExtResource("2_pot")]
+transform = Transform3D(-0.62, 0, -5.4202122e-08, 0, 0.62, 0, 5.4202122e-08, 0, -0.62, 0.9695331, 1.9455495, -7.9533854)
+
+[node name="StainlessPrepTableModel" parent="." unique_id=642538879 instance=ExtResource("3_table")]
+transform = Transform3D(2.798201, 0, 0, 0, 1.8644216, 0, 0, 0, 1.6090811, 4.1199355, 0.7749068, -7.9997315)
+
+[node name="OrderMonitorModel" parent="." unique_id=2094016485 instance=ExtResource("5_monitor")]
+transform = Transform3D(-0.48, 0, 0, 0, 0.48, 0, 0, 0, -0.48, 6.55, 1.48, -3.95)
+
+[node name="KitchenTongsPickupModel" parent="." unique_id=1422104542 instance=ExtResource("6_tongs")]
+transform = Transform3D(-0.22, 0, -1.9233012e-08, 0, 0.22, 0, 1.9233012e-08, 0, -0.22, 4.35, 1.1, -6.87)
+
+[node name="IngredientBowlPickupModel" parent="." unique_id=915104395 instance=ExtResource("7_bowl")]
+transform = Transform3D(-0.22, 0, -1.9233012e-08, 0, 0.22, 0, 1.9233012e-08, 0, -0.22, 5.25, 1.09, -6.87)
+
+[node name="SpiceLevel3Editable" parent="." unique_id=1150103281 instance=ExtResource("8_spice")]
+transform = Transform3D(-0.3, 0, -2.6226834e-08, 0, 0.3, 0, 2.6226834e-08, 0, -0.3, 4.1, 1.78, -7.5)
+
+[node name="__LayoutGenerated" type="Node3D" parent="." unique_id=1491298110]
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1706458661]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, -0.5)
+material_override = SubResource("StandardMaterial3D_xapvp")
+mesh = SubResource("BoxMesh_s7lc1")
+
+[node name="BackWall" type="MeshInstance3D" parent="." unique_id=897025026]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -9)
+material_override = SubResource("StandardMaterial3D_5vq8f")
+mesh = SubResource("BoxMesh_qbg6r")
+
+[node name="LeftWall" type="MeshInstance3D" parent="." unique_id=1669948456]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.5, -0.5)
+material_override = SubResource("StandardMaterial3D_yjsl5")
+mesh = SubResource("BoxMesh_cq2n5")
+
+[node name="RightWall" type="MeshInstance3D" parent="." unique_id=719654772]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.5, -0.5)
+material_override = SubResource("StandardMaterial3D_7q3b5")
+mesh = SubResource("BoxMesh_y0s2s")
+
+[node name="FrontWallLeft" type="MeshInstance3D" parent="." unique_id=1260907711]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 8.05)
+material_override = SubResource("StandardMaterial3D_632t7")
+mesh = SubResource("BoxMesh_ljm7x")
+
+[node name="FrontWallRight" type="MeshInstance3D" parent="." unique_id=1707978745]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.35, 2.5, 8.05)
+material_override = SubResource("StandardMaterial3D_gf372")
+mesh = SubResource("BoxMesh_b31at")
+
+[node name="Ceiling" type="MeshInstance3D" parent="." unique_id=1345706994]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30968046, 4.9292464, -0.5)
+material_override = SubResource("StandardMaterial3D_jt3xl")
+mesh = SubResource("BoxMesh_yprid")
+
+[node name="IngredientShowcase_Editable" type="Node3D" parent="." unique_id=1078485056]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -5.6, 0, -7.5)
+
+[node name="ShowcaseBack" type="MeshInstance3D" parent="IngredientShowcase_Editable" unique_id=861278768]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0.45)
+material_override = SubResource("StandardMaterial3D_usbya")
+mesh = SubResource("BoxMesh_xapvp")
+
+[node name="Shelf_0" type="MeshInstance3D" parent="IngredientShowcase_Editable" unique_id=359305214]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+material_override = SubResource("StandardMaterial3D_05iu5")
+mesh = SubResource("BoxMesh_5vq8f")
+
+[node name="Shelf_1" type="MeshInstance3D" parent="IngredientShowcase_Editable" unique_id=1770114655]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+material_override = SubResource("StandardMaterial3D_7j1ex")
+mesh = SubResource("BoxMesh_yjsl5")
+
+[node name="Shelf_2" type="MeshInstance3D" parent="IngredientShowcase_Editable" unique_id=1041072642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.45, 0)
+material_override = SubResource("StandardMaterial3D_k2csc")
+mesh = SubResource("BoxMesh_7q3b5")
+
+[node name="Shelf_3" type="MeshInstance3D" parent="IngredientShowcase_Editable" unique_id=1197011244]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4, 0)
+material_override = SubResource("StandardMaterial3D_hn8f4")
+mesh = SubResource("BoxMesh_4tp5q")
+
+[node name="MonitorDesk" type="MeshInstance3D" parent="." unique_id=747060212]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.888135, 0.55, -3.55)
+material_override = SubResource("StandardMaterial3D_nq4e5")
+mesh = SubResource("BoxMesh_632t7")
+
+[node name="KitchenSightBlockLeft" type="MeshInstance3D" parent="." unique_id=1343588026]
+visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.405957, 2.419049, -3)
+material_override = SubResource("StandardMaterial3D_hdfax")
+mesh = SubResource("BoxMesh_t2g33")
+
+[node name="KitchenSightBlockRight" type="MeshInstance3D" parent="." unique_id=2055790903]
+visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.15, 2.411328, -3)
+material_override = SubResource("StandardMaterial3D_6c2rj")
+mesh = SubResource("BoxMesh_h3vx7")
+
+[node name="KitchenSightHeader" type="MeshInstance3D" parent="." unique_id=1377915800]
+visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 3.9149811, -3)
+material_override = SubResource("StandardMaterial3D_d7dwh")
+mesh = SubResource("BoxMesh_cjnds")
+
+[node name="DeliveryCounter" type="MeshInstance3D" parent="." unique_id=270977436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8, 0.65, 4.6)
+material_override = SubResource("StandardMaterial3D_uf4jx")
+mesh = SubResource("BoxMesh_d3xau")
+
+[node name="PickupPartition" type="MeshInstance3D" parent="." unique_id=1063027995]
+visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2, 2, 5.8)
+material_override = SubResource("StandardMaterial3D_t8j80")
+mesh = SubResource("BoxMesh_301i1")
+
+[node name="ToolStation" type="MeshInstance3D" parent="." unique_id=719538180]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8, 0.45, -7.1)
+material_override = SubResource("StandardMaterial3D_t2g33")
+mesh = SubResource("BoxMesh_6c2rj")
+
+[node name="TongsPickup" type="MeshInstance3D" parent="." unique_id=1495774271]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.35, 0.98, -6.87)
+material_override = SubResource("StandardMaterial3D_h3vx7")
+mesh = SubResource("BoxMesh_d7dwh")
+
+[node name="BowlPickup" type="MeshInstance3D" parent="." unique_id=1444473218]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.25, 0.98, -6.87)
+material_override = SubResource("StandardMaterial3D_cjnds")
+mesh = SubResource("BoxMesh_uf4jx")
+
+[node name="EditorPreview" type="Node3D" parent="." unique_id=2092237521]
+metadata/editor_only_preview = true
+
+[node name="ServingBowlModel_Preview" parent="EditorPreview" unique_id=399683458 instance=ExtResource("12_46onj")]
+transform = Transform3D(-0.22, -2.676718e-09, -1.9045835e-08, 0, 0.21785897, -0.030618083, 1.9233012e-08, -0.030618083, -0.21785897, 5.8, 1.42, 4.6)
+
+[node name="DeliveryContainerModel_Preview" parent="EditorPreview" unique_id=1457525498 instance=ExtResource("13_yprid")]
+transform = Transform3D(-0.15, 0, -1.3113417e-08, 0, 0.15, 0, 1.3113417e-08, 0, -0.15, 5.8, 1.42, 4.6)
+
+[node name="BrothPotModel_EditorPreview" parent="." unique_id=364901498 instance=ExtResource("14_oaneb")]
+transform = Transform3D(-0.62, 0, -5.4202122e-08, 0, 0.62, 0, 5.4202122e-08, 0, -0.62, -1.0084726, 2.0579488, -7.9349017)
+
+[node name="BrothPotFilled_EditorPreview" parent="." unique_id=1874639021 instance=ExtResource("19_filled_pot")]
+transform = Transform3D(-0.62, 0, -5.4202122e-08, 0, 0.62, 0, 5.4202122e-08, 0, -0.62, -1.0084726, 1.5163498, -6.734245)
+
+[node name="BrothLiquid_EditorPreview" type="MeshInstance3D" parent="." unique_id=347661486]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15, 1.83, -7.22)
+material_override = SubResource("StandardMaterial3D_4tp5q")
+mesh = SubResource("CylinderMesh_hdfax")
+metadata/editor_only_preview = true
+
+[node name="Spice_1_EditorPreview" type="MeshInstance3D" parent="." unique_id=1494841379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3, 1.78, -7.5)
+material_override = SubResource("StandardMaterial3D_d3xau")
+mesh = SubResource("CylinderMesh_t2g33")
+metadata/editor_only_preview = true
+
+[node name="Spice_2_EditorPreview" type="MeshInstance3D" parent="." unique_id=1026495223]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 1.78, -7.5)
+material_override = SubResource("StandardMaterial3D_301i1")
+mesh = SubResource("CylinderMesh_6c2rj")
+metadata/editor_only_preview = true
+
+[node name="Spice_3_EditorPreview" type="MeshInstance3D" parent="." unique_id=1623654176]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1, 1.78, -7.5)
+visible = false
+material_override = SubResource("StandardMaterial3D_ip22y")
+mesh = SubResource("CylinderMesh_h3vx7")
+metadata/editor_only_preview = true
+
+[node name="IngredientPreview_0" type="MeshInstance3D" parent="." unique_id=1852812279]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.12, -7.6)
+material_override = SubResource("StandardMaterial3D_odxay")
+mesh = SubResource("CylinderMesh_d7dwh")
+metadata/editor_only_preview = true
+
+[node name="IngredientPreview_1" type="MeshInstance3D" parent="." unique_id=79790315]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 1.12, -7.6)
+material_override = SubResource("StandardMaterial3D_nlb2m")
+mesh = SubResource("CylinderMesh_cjnds")
+metadata/editor_only_preview = true
+
+[node name="IngredientPreview_2" type="MeshInstance3D" parent="." unique_id=498238420]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7, 1.12, -7.6)
+visible = false
+material_override = SubResource("StandardMaterial3D_ny2wl")
+mesh = SubResource("CylinderMesh_uf4jx")
+metadata/editor_only_preview = true
+
+[node name="IngredientPreview_3" type="MeshInstance3D" parent="." unique_id=1844650888]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 2.07, -7.6)
+material_override = SubResource("StandardMaterial3D_4pyjl")
+mesh = SubResource("CylinderMesh_d3xau")
+metadata/editor_only_preview = true
+
+[node name="IngredientPreview_4" type="MeshInstance3D" parent="." unique_id=1608475730]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 2.07, -7.6)
+material_override = SubResource("StandardMaterial3D_46ugy")
+mesh = SubResource("CylinderMesh_t8j80")
+metadata/editor_only_preview = true
+
+[node name="IngredientPreview_5" type="MeshInstance3D" parent="." unique_id=2014869164]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7, 2.07, -7.6)
+material_override = SubResource("StandardMaterial3D_e5re3")
+mesh = SubResource("CylinderMesh_301i1")
+metadata/editor_only_preview = true
+
+[node name="IngredientPreview_6" type="MeshInstance3D" parent="." unique_id=191250075]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 3.02, -7.6)
+visible = false
+material_override = SubResource("StandardMaterial3D_uudj7")
+mesh = SubResource("CylinderMesh_g4g1x")
+metadata/editor_only_preview = true
+
+[node name="IngredientPreview_7" type="MeshInstance3D" parent="." unique_id=2121669215]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 3.02, -7.6)
+material_override = SubResource("StandardMaterial3D_rnn3h")
+mesh = SubResource("CylinderMesh_ip22y")
+metadata/editor_only_preview = true
+
+[node name="IngredientPreview_8" type="MeshInstance3D" parent="." unique_id=128984829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7, 3.02, -7.6)
+material_override = SubResource("StandardMaterial3D_sdwhp")
+mesh = SubResource("CylinderMesh_wwn7l")
+metadata/editor_only_preview = true
+
+[node name="IngredientPreview_9" type="MeshInstance3D" parent="." unique_id=1424790551]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 3.97, -7.6)
+material_override = SubResource("StandardMaterial3D_r2uqa")
+mesh = SubResource("CylinderMesh_odxay")
+metadata/editor_only_preview = true
+
+[node name="IngredientPreview_10" type="MeshInstance3D" parent="." unique_id=1124088172]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 3.97, -7.6)
+material_override = SubResource("StandardMaterial3D_r5q5q")
+mesh = SubResource("CylinderMesh_jx5yl")
+metadata/editor_only_preview = true
+
+[node name="IngredientPreview_11" type="MeshInstance3D" parent="." unique_id=1381775176]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7, 3.97, -7.6)
+material_override = SubResource("StandardMaterial3D_3hmej")
+mesh = SubResource("CylinderMesh_nlb2m")
+metadata/editor_only_preview = true
+
+[node name="TrashCan_EditorPreview" type="MeshInstance3D" parent="." unique_id=748917411]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.2, 0.55, -3.8)
+material_override = SubResource("StandardMaterial3D_2njs3")
+mesh = SubResource("CylinderMesh_2rx0x")
+metadata/editor_only_preview = true
+
+[node name="IngredientTofuModel_EditorPreview" parent="." unique_id=209741236 instance=ExtResource("15_yprid")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -3.7, 1.15, -7.6)
+
+[node name="IngredientSproutsModel_EditorPreview" parent="." unique_id=859332513 instance=ExtResource("16_usbya")]
+transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, -7.5, 3.05, -7.6)
+
+[node name="KitchenSinkModel_EditorPreview" parent="." unique_id=240106971 instance=ExtResource("17_xapvp")]
+transform = Transform3D(1.5901905, 0, -0.03562528, 0, 1.5576197, 0, 0.032081157, 0, 1.7658647, 7.716266, 1.4421797, -8.069077)
+
+[node name="BrothStockPack_EditorPreview" parent="." unique_id=146673961 instance=ExtResource("18_usbya")]
+transform = Transform3D(0.3739894, 0, -0.067319795, 0, 0.38000005, 0, 0.067319795, 0, 0.3739894, 4.777156, 2.082274, -7.242552)

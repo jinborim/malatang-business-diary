@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bs13gwg2cvv3a"]
+
+[ext_resource type="Script" path="res://assets/scripts/main.gd" id="1"]
+
+[node name="Malatang" type="Node3D" unique_id=1421736360]
+script = ExtResource("1")
+

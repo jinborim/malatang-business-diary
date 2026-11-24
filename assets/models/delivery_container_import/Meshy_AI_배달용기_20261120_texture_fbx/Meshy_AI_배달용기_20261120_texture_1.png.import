@@ -1,0 +1,44 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://1scopnemot5o"
+path.s3tc="res://.godot/imported/Meshy_AI_배달용기_20261120_texture_1.png-9e07f1160f269965bc564f2fa9ded0e8.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "6550468f1291779f1a7cd100d6a484fa"
+}
+
+[deps]
+
+source_file="res://assets/models/delivery_container_import/Meshy_AI_배달용기_20261120_texture_fbx/Meshy_AI_배달용기_20261120_texture_1.png"
+dest_files=["res://.godot/imported/Meshy_AI_배달용기_20261120_texture_1.png-9e07f1160f269965bc564f2fa9ded0e8.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://assets/models/delivery_container_import/Meshy_AI_배달용기_20261120_texture_fbx/Meshy_AI_배달용기_20261120_texture_1.png"
+process/channel_remap/red=0
+process/channel_remap/green=1
+process/channel_remap/blue=2
+process/channel_remap/alpha=3
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
