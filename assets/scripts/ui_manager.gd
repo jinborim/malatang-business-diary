@@ -952,6 +952,51 @@ func open_monitor() -> void:
 	host.monitor_camera_original_rotation=host.camera.rotation
 	host.monitor_camera_original_fov=host.camera.fov
 	host._set_gameplay_hud_visible(false)
+	player.input_locked=true
+	if is_instance_valid(host.held_tools): host.held_tools.visible=false
+	host.prompt_label.text=""
+	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
+	# Move the actual 3D host.camera toward the monitor screen. The player stays in
+	# place; this is a smooth dolly-in like moving into a laptop display.
+	var monitor:=host.find_child("OrderMonitorModel",true,false) as Node3D
+	var monitor_position:=Vector3(6.55,1.48,-3.95)
+	if is_instance_valid(monitor): monitor_position=monitor.global_position
+	var monitor_basis:=Basis.IDENTITY
+	if is_instance_valid(monitor): monitor_basis=monitor.global_transform.basis.orthonormalized()
+	var screen_normal:Vector3=monitor_basis*Vector3(0,0,1)
+	var monitor_screen:=monitor_position+screen_normal*0.10+Vector3(0,0.12,0)
+	var focus_position:=monitor_screen+screen_normal*0.22
+	# The player is the yaw parent of the first-person host.camera. Move that parent
+	# and rotate it toward the monitor so diagonal interactions also face the
+	# screen instead of keeping the old heading.
+	var focus_yaw:float=atan2(-(monitor_screen.x-focus_position.x),-(monitor_screen.z-focus_position.z))
+	var player_focus_position:Vector3=focus_position-Basis(Vector3.UP,focus_yaw)*host.camera.position
+	player_focus_position.y=player.global_position.y
+	var camera_height:float=player_focus_position.y+host.camera.position.y
+	var horizontal_distance:float=Vector2(monitor_screen.x-focus_position.x,monitor_screen.z-focus_position.z).length()
+	var focus_pitch:float=atan2(monitor_screen.y-camera_height,horizontal_distance)
+	if is_instance_valid(host.monitor_camera_tween): host.monitor_camera_tween.kill()
+	host.monitor_camera_tween=create_tween().set_parallel(true)
+	host.monitor_camera_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	host.monitor_camera_tween.tween_property(player,"global_position",player_focus_position,0.70)
+	var start_yaw:float=player.global_rotation.y
+	var yaw_delta:float=angle_difference(start_yaw,focus_yaw)
+	host.monitor_camera_tween.tween_method(func(progress: float): player.global_rotation.y=start_yaw+yaw_delta*progress,0.0,1.0,0.70)
+	host.monitor_camera_tween.tween_property(host.camera,"rotation:x",focus_pitch,0.70)
+	host.monitor_camera_tween.tween_property(host.camera,"fov",34.0,0.70)
+	host.monitor_backdrop.visible=false
+	host.order_panel.visible=false
+	await host.monitor_camera_tween.finished
+	if not host.monitor_camera_focused: return
+	host.monitor_backdrop.modulate.a=0.0
+	host.order_panel.modulate.a=0.0
+	host.monitor_backdrop.visible=true
+	host.order_panel.visible=true
+	host._refresh_order_panel()
+	var monitor_ui_tween:=create_tween().set_parallel(true)
+	monitor_ui_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	monitor_ui_tween.tween_property(host.monitor_backdrop,"modulate:a",1.0,0.20)
+	monitor_ui_tween.tween_property(host.order_panel,"modulate:a",1.0,0.28)
 
 func close_monitor() -> void:
 	if not host.monitor_camera_focused:
@@ -986,48 +1031,3 @@ func ingredient_icon_path(ingredient_name: String) -> String:
 		"\\uC18C\\uC2DC\\uC9C0":"res://assets/ui/ingredients/sausage.svg"
 	}
 	return str(paths.get(ingredient_name,"res://assets/ui/ingredients/cheonggyeongchae.svg"))
-	player.input_locked=true
-	if is_instance_valid(host.held_tools): host.held_tools.visible=false
-	host.prompt_label.text=""
-	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
-	# Move the actual 3D host.camera toward the monitor screen. The player stays in
-	# place; this is a smooth dolly-in like moving into a laptop display.
-	var monitor:=host.find_child("OrderMonitorModel",true,false) as Node3D
-	var monitor_position:=Vector3(6.55,1.48,-3.95)
-	if is_instance_valid(monitor): monitor_position=monitor.global_position
-	var monitor_basis:=Basis.IDENTITY
-	if is_instance_valid(monitor): monitor_basis=monitor.global_transform.basis.orthonormalized()
-	var screen_normal:Vector3=monitor_basis*Vector3(0,0,1)
-	var monitor_screen:=monitor_position+screen_normal*0.10+Vector3(0,0.12,0)
-	var focus_position:=monitor_screen+screen_normal*0.22
-	# The player is the yaw parent of the first-person host.camera. Move that parent
-	# and rotate it toward the monitor so diagonal interactions also face the
-	# screen instead of keeping the old heading.
-	var focus_yaw:=atan2(-(monitor_screen.x-focus_position.x),-(monitor_screen.z-focus_position.z))
-	var player_focus_position:Vector3=focus_position-Basis(Vector3.UP,focus_yaw)*host.camera.position
-	player_focus_position.y=player.global_position.y
-	var camera_height:float=player_focus_position.y+host.camera.position.y
-	var horizontal_distance:=Vector2(monitor_screen.x-focus_position.x,monitor_screen.z-focus_position.z).length()
-	var focus_pitch:=atan2(monitor_screen.y-camera_height,horizontal_distance)
-	if is_instance_valid(host.monitor_camera_tween): host.monitor_camera_tween.kill()
-	host.monitor_camera_tween=create_tween().set_parallel(true)
-	host.monitor_camera_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
-	host.monitor_camera_tween.tween_property(player,"global_position",player_focus_position,0.70)
-	var start_yaw:=player.global_rotation.y
-	var yaw_delta:=angle_difference(start_yaw,focus_yaw)
-	host.monitor_camera_tween.tween_method(func(progress: float): player.global_rotation.y=start_yaw+yaw_delta*progress,0.0,1.0,0.70)
-	host.monitor_camera_tween.tween_property(host.camera,"rotation:x",focus_pitch,0.70)
-	host.monitor_camera_tween.tween_property(host.camera,"fov",34.0,0.70)
-	host.monitor_backdrop.visible=false
-	host.order_panel.visible=false
-	await host.monitor_camera_tween.finished
-	if not host.monitor_camera_focused: return
-	host.monitor_backdrop.modulate.a=0.0
-	host.order_panel.modulate.a=0.0
-	host.monitor_backdrop.visible=true
-	host.order_panel.visible=true
-	host._refresh_order_panel()
-	var monitor_ui_tween:=create_tween().set_parallel(true)
-	monitor_ui_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	monitor_ui_tween.tween_property(host.monitor_backdrop,"modulate:a",1.0,0.20)
-	monitor_ui_tween.tween_property(host.order_panel,"modulate:a",1.0,0.28)
