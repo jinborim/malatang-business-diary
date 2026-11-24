@@ -63,17 +63,31 @@ func show_start_menu() -> void:
 	start_menu_layer.name="StartMenuLayer"
 	start_menu_layer.layer=50
 	host.add_child(start_menu_layer)
+	var viewport_container:=SubViewportContainer.new()
+	viewport_container.name="StartExteriorViewportContainer"
+	viewport_container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	viewport_container.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	viewport_container.stretch=true
+	start_menu_layer.add_child(viewport_container)
+	var viewport:=SubViewport.new()
+	viewport.name="StartExteriorViewport"
+	viewport.size=Vector2i(1280,720)
+	viewport.render_target_update_mode=SubViewport.UPDATE_ALWAYS
+	viewport.transparent_bg=false
+	viewport.own_world_3d=true
+	viewport_container.add_child(viewport)
+	_build_start_exterior(viewport)
 	var backdrop:=ColorRect.new()
 	backdrop.name="StartMenuBackdrop"
 	backdrop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	backdrop.color=Color("#101b25")
+	backdrop.color=Color(0.02,0.05,0.07,0.34)
+	backdrop.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	start_menu_layer.add_child(backdrop)
 	var glow:=Panel.new()
-	glow.set_anchors_preset(Control.PRESET_CENTER)
-	glow.position=Vector2(-430,-235)
-	glow.size=Vector2(860,470)
+	glow.position=Vector2(770,92)
+	glow.size=Vector2(420,536)
 	var glow_style:=StyleBoxFlat.new()
-	glow_style.bg_color=Color("#263e4d")
+	glow_style.bg_color=Color(0.08,0.12,0.15,0.92)
 	glow_style.border_color=Color("#a9823d")
 	glow_style.set_border_width_all(2)
 	glow_style.set_corner_radius_all(18)
@@ -132,6 +146,89 @@ func show_start_menu() -> void:
 	quit_button.pressed.connect(func(): get_tree().quit())
 	content.add_child(quit_button)
 	style_start_menu()
+
+func _start_box(parent: Node3D, position: Vector3, size: Vector3, color: Color) -> MeshInstance3D:
+	var mesh_instance:=MeshInstance3D.new()
+	var box:=BoxMesh.new()
+	box.size=size
+	mesh_instance.mesh=box
+	mesh_instance.position=position
+	var material:=StandardMaterial3D.new()
+	material.albedo_color=color
+	material.roughness=0.78
+	mesh_instance.material_override=material
+	parent.add_child(mesh_instance)
+	return mesh_instance
+
+func _start_quad(parent: Node3D, position: Vector3, size: Vector2, color: Color, texture_path: String="") -> MeshInstance3D:
+	var mesh_instance:=MeshInstance3D.new()
+	var quad:=QuadMesh.new()
+	quad.size=size
+	mesh_instance.mesh=quad
+	mesh_instance.position=position
+	var material:=StandardMaterial3D.new()
+	material.albedo_color=color
+	material.roughness=0.62
+	if not texture_path.is_empty(): material.albedo_texture=load(texture_path) as Texture2D
+	mesh_instance.material_override=material
+	parent.add_child(mesh_instance)
+	return mesh_instance
+
+func _build_start_exterior(viewport: SubViewport) -> void:
+	var scene:=Node3D.new()
+	scene.name="MalatangShopExterior"
+	viewport.add_child(scene)
+	var environment:=WorldEnvironment.new()
+	var env:=Environment.new()
+	env.background_mode=Environment.BG_COLOR
+	env.background_color=Color("#14232d")
+	env.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR
+	env.ambient_light_color=Color("#9bb2bd")
+	env.ambient_light_energy=0.65
+	env.tonemap_mode=Environment.TONE_MAPPER_FILMIC
+	environment.environment=env
+	scene.add_child(environment)
+	var sun:=DirectionalLight3D.new()
+	sun.rotation_degrees=Vector3(-52,-28,0)
+	sun.light_color=Color("#f6d6aa")
+	sun.light_energy=1.1
+	sun.shadow_enabled=true
+	scene.add_child(sun)
+	var camera:=Camera3D.new()
+	camera.name="StartExteriorCamera"
+	camera.position=Vector3(0,3.3,11.5)
+	camera.fov=48.0
+	scene.add_child(camera)
+	camera.look_at(Vector3(0,2.55,0),Vector3.UP)
+	var facade:=_start_box(scene,Vector3(0,2.75,0),Vector3(13.5,5.5,0.75),Color("#55423d"))
+	_start_box(scene,Vector3(0,0.62,0.02),Vector3(14.2,0.35,1.15),Color("#252b31"))
+	_start_box(scene,Vector3(0,5.45,0.02),Vector3(14.2,0.35,1.15),Color("#272c30"))
+	_start_box(scene,Vector3(0,4.15,0.68),Vector3(14.0,0.28,1.25),Color("#a64032"))
+	_start_box(scene,Vector3(0,4.04,1.02),Vector3(14.0,0.14,0.55),Color("#d5b066"))
+	_start_quad(scene,Vector3(-3.8,2.75,0.42),Vector2(4.8,2.6),Color("#315465"))
+	_start_quad(scene,Vector3(3.25,2.75,0.42),Vector2(3.1,2.6),Color("#315465"))
+	_start_quad(scene,Vector3(-3.8,2.75,0.47),Vector2(4.45,2.25),Color("#e7bd77"))
+	_start_quad(scene,Vector3(3.25,2.75,0.47),Vector2(2.75,2.25),Color("#e7bd77"))
+	_start_box(scene,Vector3(0.0,2.05,0.48),Vector3(1.65,3.5,0.48),Color("#1d252b"))
+	_start_quad(scene,Vector3(0.0,2.18,0.74),Vector2(1.28,2.75),Color("#172c38"))
+	_start_box(scene,Vector3(0,1.02,0.62),Vector3(14.3,0.28,1.2),Color("#33383a"))
+	_start_box(scene,Vector3(-5.25,1.75,0.72),Vector3(1.25,0.95,0.18),Color("#d8bd83"))
+	_start_box(scene,Vector3(-5.25,1.12,0.72),Vector3(1.15,0.12,0.82),Color("#314e63"))
+	_start_box(scene,Vector3(5.25,1.3,0.72),Vector3(1.0,0.72,0.25),Color("#58745b"))
+	_start_box(scene,Vector3(5.25,0.78,0.72),Vector3(1.25,0.16,0.85),Color("#2e4735"))
+	_start_quad(scene,Vector3(0,4.86,0.48),Vector2(7.2,1.35),Color.WHITE,"res://malatang_store_sign_texture.png")
+	var sign_light:=OmniLight3D.new()
+	sign_light.position=Vector3(0,4.4,1.8)
+	sign_light.light_color=Color("#ffd27c")
+	sign_light.light_energy=4.0
+	sign_light.omni_range=7.0
+	scene.add_child(sign_light)
+	var door_light:=OmniLight3D.new()
+	door_light.position=Vector3(0,2.2,2.0)
+	door_light.light_color=Color("#ffc982")
+	door_light.light_energy=2.2
+	door_light.omni_range=5.0
+	scene.add_child(door_light)
 
 func style_start_menu() -> void:
 	if not is_instance_valid(start_menu_layer): return
