@@ -340,12 +340,12 @@ func _import_child_animation(model: Node3D, path: String, animation_name: String
 	var resource:Resource=load(path)
 	if not resource is PackedScene: return
 	var scene:Node3D=(resource as PackedScene).instantiate() as Node3D
-	var source:=host._find_animation_player(scene)
-	var target:=host._find_animation_player(model)
+	var source:AnimationPlayer=host._find_animation_player(scene)
+	var target:AnimationPlayer=host._find_animation_player(model)
 	if not source or not target:
 		scene.free()
 		return
-	var library:=target.get_animation_library("")
+	var library:AnimationLibrary=target.get_animation_library("")
 	if not library:
 		library=AnimationLibrary.new()
 		target.add_animation_library("",library)
@@ -353,7 +353,7 @@ func _import_child_animation(model: Node3D, path: String, animation_name: String
 	for animation in source.get_animation_list():
 		var lowered:=String(animation).to_lower()
 		if lowered=="reset" or lowered.ends_with("/reset"): continue
-		var clip:=source.get_animation(animation)
+		var clip:Animation=source.get_animation(animation)
 		for keyword in keywords:
 			if clip and (selected==null or lowered.contains(str(keyword))): selected=clip
 	if selected:

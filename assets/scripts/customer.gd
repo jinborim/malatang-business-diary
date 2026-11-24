@@ -101,7 +101,7 @@ func _set_seated_pose() -> void:
 					break
 			if seated_clip!=&"":
 				seated_animation_player.play(seated_clip)
-				var clip:=seated_animation_player.get_animation(seated_clip)
+				var clip:Animation=seated_animation_player.get_animation(seated_clip)
 				if clip: seated_animation_player.seek(maxf(0.0,clip.length-0.01),true)
 				seated_animation_player.pause()
 	var selected_sit:=sit_animation
