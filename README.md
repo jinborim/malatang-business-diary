@@ -1,54 +1,57 @@
-# Malatang Business Diary
+# 마라탕 영업일지
 
-A first-person restaurant management simulation made with Godot 4.
+Godot 4로 제작 중인 1인칭 마라탕 가게 운영 시뮬레이션 게임입니다.
 
-You run a Korean-style malatang shop: prepare ingredients, cook orders, serve customers, manage stock, and expand the store.
+플레이어는 한국식 마라탕 가게를 운영하며 재료를 준비하고, 주문을 조리하고, 손님을 응대하고, 재고와 매장을 관리합니다.
 
-## Features
+## 주요 기능
 
-- First-person kitchen and restaurant gameplay
-- Ingredient selection and malatang cooking flow
-- Delivery orders and customer service
-- Dine-in customer flow for later shop stages
-- Inventory, supplies, upgrades, and daily sales management
-- Korean malatang shop interior and dining area
-- Monitor UI with order management, purchasing, upgrades, and store management
-- Start screen with automatic save loading
+- 1인칭 주방 및 가게 플레이
+- 재료 선택과 마라탕 조리 과정
+- 배달 주문 확인 및 주문 처리
+- 이후 씬에서 손님이 매장 안에서 식사하는 기능
+- 재고와 소모품 관리
+- 매출, 평점, 영업일 관리
+- 가게 업그레이드 시스템
+- 한국식 마라탕 가게 인테리어와 식사 공간
+- 주문 관리·재료 구매·업그레이드·가게 관리 모니터 UI
+- 3D 가게 외부를 배경으로 한 게임 시작 화면
+- 자동 저장 및 진행 상황 불러오기
 
-## Requirements
+## 실행 환경
 
-- Godot 4.7 or later
-- Godot Compatibility renderer
+- Godot 4.7 이상
+- Compatibility 렌더러
 
-## Run locally
+## 실행 방법
 
-1. Clone this repository.
-2. Open the project in Godot.
-3. Run `Malatang.tscn` or press `F6` from the main scene.
+1. 이 저장소를 내려받습니다.
+2. Godot에서 프로젝트 폴더를 엽니다.
+3. `Malatang.tscn`을 실행하거나 메인 씬에서 `F6`을 누릅니다.
 
-The configured project entry point is `Malatang.tscn`.
+프로젝트의 기본 실행 씬은 `Malatang.tscn`입니다.
 
-## Controls
+## 조작법
 
-| Key | Action |
+| 키 | 기능 |
 | --- | --- |
-| `WASD` | Move |
-| Mouse | Look around |
-| `E` | Interact |
-| `ESC` | Close the monitor or menu |
+| `WASD` | 이동 |
+| 마우스 | 시점 조작 |
+| `E` | 상호작용 |
+| `ESC` | 모니터 또는 메뉴 닫기 |
 
-## Project structure
+## 프로젝트 구조
 
-- `Malatang.tscn` — main game scene
-- `assets/scripts/main.gd` — game coordinator
-- `assets/scripts/*_manager.gd` — feature-specific managers
-- `assets/layouts/` — store layouts for each stage
-- `assets/models/` — 3D models and textures
+- `Malatang.tscn` — 메인 게임 씬
+- `assets/scripts/main.gd` — 게임 전체 조정
+- `assets/scripts/*_manager.gd` — 기능별 관리자 스크립트
+- `assets/layouts/` — 씬별 가게 레이아웃
+- `assets/models/` — 3D 모델과 텍스처
 
-## Status
+## 개발 상태
 
-This project is actively being developed. UI, cooking, customer, and store layout systems are still being refined.
+현재 개발 중인 프로젝트입니다. UI, 조리, 손님, 가게 레이아웃 기능을 계속 개선하고 있습니다.
 
-## License
+## 라이선스
 
-This repository is for the project owner's game development work. Asset licenses and attribution requirements may vary by asset.
+이 저장소는 게임 개발 작업을 위한 프로젝트입니다. 사용된 외부 에셋은 각각의 라이선스와 출처 조건을 확인해야 합니다.
