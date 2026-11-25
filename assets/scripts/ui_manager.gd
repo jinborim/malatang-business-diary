@@ -110,11 +110,14 @@ func show_start_menu() -> void:
 	eyebrow.add_theme_font_size_override("font_size",14)
 	eyebrow.add_theme_color_override("font_color",Color("#dcb979"))
 	content.add_child(eyebrow)
-	var title:=Label.new()
-	title.text="마라탕 가게"
-	title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_size_override("font_size",48)
-	title.add_theme_color_override("font_color",Color("#fff8e6"))
+	var title:=TextureRect.new()
+	title.name="StartMenuTitleImage"
+	title.texture=load("res://assets/ui/start_menu/title.png") as Texture2D
+	title.custom_minimum_size=Vector2(0,96)
+	title.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	title.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+	title.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	title.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	content.add_child(title)
 	var subtitle:=Label.new()
 	subtitle.text="재료를 고르고, 끓이고, 손님을 맞이하세요"
@@ -127,10 +130,10 @@ func show_start_menu() -> void:
 	content.add_child(spacer)
 	var start_button:=Button.new()
 	start_button.name="StartGameButton"
-	start_button.text="게임 시작"
+	start_button.tooltip_text="게임 시작"
 	start_button.custom_minimum_size=Vector2(0,62)
-	start_button.add_theme_font_size_override("font_size",22)
 	start_button.pressed.connect(hide_start_menu)
+	_add_start_menu_button_image(start_button,"res://assets/ui/start_menu/start.png")
 	content.add_child(start_button)
 	var continue_hint:=Label.new()
 	continue_hint.text="저장된 가게 진행 상황은 자동으로 불러옵니다."
@@ -140,12 +143,24 @@ func show_start_menu() -> void:
 	content.add_child(continue_hint)
 	var quit_button:=Button.new()
 	quit_button.name="QuitGameButton"
-	quit_button.text="게임 종료"
+	quit_button.tooltip_text="게임 종료"
 	quit_button.custom_minimum_size=Vector2(0,48)
-	quit_button.add_theme_font_size_override("font_size",17)
 	quit_button.pressed.connect(func(): get_tree().quit())
+	_add_start_menu_button_image(quit_button,"res://assets/ui/start_menu/quit.png")
 	content.add_child(quit_button)
 	style_start_menu()
+
+func _add_start_menu_button_image(button: Button, texture_path: String) -> void:
+	var image:=TextureRect.new()
+	image.name="StartMenuButtonImage"
+	image.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	image.offset_left=18
+	image.offset_right=-18
+	image.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+	image.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	image.texture=load(texture_path) as Texture2D
+	image.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	button.add_child(image)
 
 func _start_box(parent: Node3D, position: Vector3, size: Vector3, color: Color) -> MeshInstance3D:
 	var mesh_instance:=MeshInstance3D.new()
