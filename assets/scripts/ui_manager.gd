@@ -200,6 +200,23 @@ func _build_start_exterior(viewport: SubViewport) -> void:
 	camera.fov=48.0
 	scene.add_child(camera)
 	camera.look_at(Vector3(0,2.55,0),Vector3.UP)
+	_start_box(scene,Vector3(0,-0.06,-3.0),Vector3(30.0,0.18,22.0),Color("#242a30"))
+	_start_box(scene,Vector3(-10.0,4.5,-6.0),Vector3(5.5,9.0,2.4),Color("#263843"))
+	_start_box(scene,Vector3(10.0,5.2,-7.5),Vector3(6.5,10.4,2.6),Color("#303c48"))
+	_start_box(scene,Vector3(-15.0,3.4,-8.5),Vector3(4.0,6.8,2.2),Color("#3d4650"))
+	_start_box(scene,Vector3(15.0,4.1,-9.0),Vector3(4.2,8.2,2.2),Color("#38444d"))
+	for window_x in [-11.7,-10.0,-8.3,8.2,10.0,11.8]:
+		for window_y in [3.0,5.0,7.0]:
+			_start_box(scene,Vector3(window_x,window_y,-4.72 if window_x<0 else -6.18),Vector3(0.72,0.42,0.06),Color("#e2b66b"))
+	for lamp_x in [-7.2,7.2]:
+		_start_box(scene,Vector3(lamp_x,2.4,2.0),Vector3(0.10,4.8,0.10),Color("#1b2024"))
+		_start_box(scene,Vector3(lamp_x,4.75,2.0),Vector3(0.8,0.10,0.10),Color("#1b2024"))
+		var lamp:=OmniLight3D.new()
+		lamp.position=Vector3(lamp_x,4.55,1.85)
+		lamp.light_color=Color("#ffd889")
+		lamp.light_energy=1.8
+		lamp.omni_range=5.0
+		scene.add_child(lamp)
 	var facade:=_start_box(scene,Vector3(0,2.75,0),Vector3(13.5,5.5,0.75),Color("#55423d"))
 	_start_box(scene,Vector3(0,0.62,0.02),Vector3(14.2,0.35,1.15),Color("#252b31"))
 	_start_box(scene,Vector3(0,5.45,0.02),Vector3(14.2,0.35,1.15),Color("#272c30"))
@@ -216,7 +233,7 @@ func _build_start_exterior(viewport: SubViewport) -> void:
 	_start_box(scene,Vector3(-5.25,1.12,0.72),Vector3(1.15,0.12,0.82),Color("#314e63"))
 	_start_box(scene,Vector3(5.25,1.3,0.72),Vector3(1.0,0.72,0.25),Color("#58745b"))
 	_start_box(scene,Vector3(5.25,0.78,0.72),Vector3(1.25,0.16,0.85),Color("#2e4735"))
-	_start_quad(scene,Vector3(0,4.86,0.48),Vector2(7.2,1.35),Color.WHITE,"res://malatang_store_sign_texture.png")
+	_start_quad(scene,Vector3(0,4.86,0.48),Vector2(7.2,1.35),Color.WHITE,"res://assets/textures/malatang_store_sign_panda.png")
 	var sign_light:=OmniLight3D.new()
 	sign_light.position=Vector3(0,4.4,1.8)
 	sign_light.light_color=Color("#ffd27c")
